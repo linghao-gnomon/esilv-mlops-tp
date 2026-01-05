@@ -24,7 +24,6 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.ensemble import RandomForestClassifier
 import time
 import os
-get_ipython().run_line_magic('matplotlib', 'inline')
 #import warnings
 #warnings.filterwarnings('ignore')
 
