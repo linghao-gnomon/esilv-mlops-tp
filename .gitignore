@@ -1,10 +1,26 @@
+# Environment & Secrets
+.env
 secrets.yaml
 
-.env
-.venv/
+# Python
 __pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Jupyter
 .ipynb_checkpoints/
+
+# IDE
 .vscode/
+.idea/
+
+# OS
 .DS_Store
+
+# Data & Models
 data/processed/
 models/
+*.pkl
+*.joblib
