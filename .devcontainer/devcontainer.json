@@ -1,0 +1,9 @@
+{
+  "name": "titanic-dev",
+  "dockerFile": "Dockerfile",
+  "postCreateCommand": "pip install -r requirements.txt",
+  "workspaceFolder": "/workspace",
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace,type=bind"
+  ]
+}
