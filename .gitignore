@@ -24,3 +24,12 @@ data/processed/
 models/
 *.pkl
 *.joblib
+
+# Testing & Coverage
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+
+# Documentation
+doc/

@@ -69,6 +69,9 @@ def create_model_pipeline(
     Returns:
         Pipeline that includes preprocessing and RandomForestClassifier.
     """
+    if n_estimators <= 0:
+        raise ValueError("n_estimators must be positive")
+    
     preprocessor = create_preprocessor(numeric_features, categorical_features)
 
     pipe = Pipeline(
