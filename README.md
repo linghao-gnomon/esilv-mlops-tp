@@ -7,7 +7,8 @@ A machine learning project for predicting passenger survival on the Titanic usin
 ```
 .
 ├── data/
-│   └── raw/           # Raw data files
+│   ├── raw/           # Raw data files
+│   └── processed/     # Processed data files
 ├── notebooks/         # Jupyter notebooks for exploration
 ├── src/               # Source code
 │   ├── data/          # Data utilities
@@ -17,8 +18,16 @@ A machine learning project for predicting passenger survival on the Titanic usin
 │   ├── evaluation.py  # Model evaluation
 │   ├── constants.py   # Project constants
 │   └── main.py        # Main entry point
+├── tests/             # Unit tests
+│   ├── test_data.py   # Data loading tests
+│   ├── test_model.py  # Model tests
+│   └── test_training.py # Training tests
+├── .github/
+│   └── workflows/     # GitHub Actions CI/CD
 ├── Makefile           # Common tasks
-└── pyproject.toml     # Project dependencies
+├── Dockerfile         # Docker image definition
+├── pyproject.toml     # Project dependencies
+└── requirements.txt   # Python dependencies (alternative)
 ```
 
 ## Installation
@@ -75,14 +84,21 @@ python src/main.py --n_trees 50
 ### Development tasks
 
 ```bash
-# Format code
+# Format code (using black)
 make format
 
-# Lint code
+# Lint code (using pylint)
 make lint
 
 # Check code (lint + format check)
 make check
+
+# Run tests
+uv run pytest -v
+
+# Run tests with coverage
+uv run coverage run -m pytest tests/
+uv run coverage report -m
 ```
 
 ## Features
@@ -91,6 +107,34 @@ make check
 - **Model training**: Random Forest classifier with configurable parameters
 - **Model evaluation**: Comprehensive metrics including accuracy and confusion matrix
 - **Modular design**: Clean separation of data loading, splitting, modeling, and evaluation
+- **Testing**: Unit tests with pytest and test coverage
+- **CI/CD**: Automated testing and code quality checks with GitHub Actions
+- **Docker support**: Containerized deployment with Dockerfile and Dev Containers
+
+## GitHub Actions
+
+This project uses GitHub Actions for continuous integration and deployment:
+
+### Automated Workflows
+
+1. **Tests** (`.github/workflows/tests.yml`)
+   - Runs on: push and pull requests to `main` branch
+   - Executes: pytest test suite
+   - Python version: 3.10
+
+2. **Code Quality** (`.github/workflows/codecheck.yml`)
+   - Runs on: push and pull requests to `main` branch
+   - Executes: ruff linting and formatting checks
+   - Excludes: Jupyter notebooks (`*.ipynb`)
+
+3. **Docker Build** (`.github/workflows/prod.yml`)
+   - Runs on: push to `main` or `dev` branches
+   - Executes: Builds and pushes Docker image to Docker Hub
+   - Requires: `DOCKER_USERNAME` and `DOCKER_PASSWORD` secrets
+
+### Viewing Workflow Status
+
+Check the [Actions tab](https://github.com/alanliyue/esilv-mlops-tp/actions) in GitHub to see workflow runs and their status.
 
 ## Requirements
 
