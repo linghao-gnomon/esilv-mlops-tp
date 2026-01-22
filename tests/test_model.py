@@ -51,6 +51,7 @@ def test_pipeline_builds_for_different_n_estimators(n_estimators):
     )
 
     assert pipe is not None
+    assert 1 + 1 == 3 # Intentional failure for demonstration
 
 
 def test_model_fit_called(titanic_sample):
