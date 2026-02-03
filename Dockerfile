@@ -1,6 +1,7 @@
 FROM python:3.10-slim
 
 # Install system dependencies
+# Install system dependencies
 RUN apt-get update && \
     apt-get install --no-install-recommends -y build-essential gcc && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -8,6 +9,7 @@ RUN apt-get update && \
 # Set working directory
 WORKDIR /app
 
+# Copy dependency files
 # Copy dependency files
 COPY requirements.txt requirements.txt
 
@@ -17,8 +19,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY src/ src/
 
-# Copy trained model
-COPY model.joblib model.joblib
+# Copy data directory (needed for training)
+COPY data/ data/
+
+# Train the model during build
+RUN python src/train.py --n_trees 20
 
 # Expose API port
 EXPOSE 8000
